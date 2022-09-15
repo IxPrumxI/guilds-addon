@@ -1,0 +1,9 @@
+{
+  "uuid": "%uuid%",
+  "name": "BlocksMC-Guilds",
+  "mainClass": "com.blocksmc.Guilds.GuildsAddon",
+  "description": "Test",
+  "version": 1,
+  "author": "Prum",
+  "category": 3
+}
