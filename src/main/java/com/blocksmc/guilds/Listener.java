@@ -3,8 +3,6 @@ package com.blocksmc.guilds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class Listener {
@@ -12,12 +10,6 @@ public class Listener {
 
     public Listener(){
         GuildsInstance = GuildsAddon.getInstance();
-    }
-
-    @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void onNameRender(PlayerEvent.NameFormat event){
-        EntityPlayer player = event.entityPlayer;
-        GuildsAddon.getInstance().getPlayerGuild(player);
     }
 
     @SubscribeEvent()
