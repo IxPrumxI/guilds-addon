@@ -6,7 +6,6 @@ import net.labymod.settings.elements.SettingsElement;
 import net.labymod.settings.elements.StringElement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.scoreboard.ScorePlayerTeam;
-import net.minecraftforge.common.MinecraftForge;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -27,7 +26,7 @@ public class GuildsAddon extends LabyModAddon {
     public void onEnable() {
         instance = this;
 
-        MinecraftForge.EVENT_BUS.register(new Listener());
+        getApi().getEventManager().registerOnAttack(new Listener());
     }
 
     @Override

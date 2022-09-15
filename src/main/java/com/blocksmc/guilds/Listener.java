@@ -1,22 +1,21 @@
 package com.blocksmc.guilds;
 
+import net.labymod.utils.Consumer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class Listener {
+public class Listener implements Consumer<Entity> {
     private final GuildsAddon GuildsInstance;
 
     public Listener(){
         GuildsInstance = GuildsAddon.getInstance();
     }
 
-    @SubscribeEvent()
-    public void onPlayerAttack(AttackEntityEvent event){
-        EntityPlayer attacker = (EntityPlayer) event.entityLiving;
-        if(!(event.target instanceof EntityPlayer)) return;
-        EntityPlayer player = (EntityPlayer) event.target;
+    public void accept(Entity entity) {
+        EntityPlayer attacker =  Minecraft.getMinecraft().thePlayer;
+        if(!(entity instanceof EntityPlayer)) return;
+        EntityPlayer player = (EntityPlayer) entity;
 
         Guild playerClan = GuildsInstance.getPlayerGuild(player);
         Guild attackerClan = GuildsInstance.getPlayerGuild(attacker);
