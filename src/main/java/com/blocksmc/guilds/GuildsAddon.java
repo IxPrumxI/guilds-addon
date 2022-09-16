@@ -31,12 +31,15 @@ public class GuildsAddon extends LabyModAddon {
 
     @Override
     public void loadConfig() {
-        this.soundPath = getConfig().get("file").getAsString();
+        this.soundPath = getConfig().has("file") ? getConfig().get("file").getAsString() : null;
     }
 
     @Override
     protected void fillSettings(List<SettingsElement> list) {
-        list.add(new StringElement("Sound File - WAV Format Only", "file", new ControlElement.IconData("sound.png")));
+        URL fileUri = getClass().getResource("/sound.jpg");
+        if(fileUri == null) return;
+        ControlElement.IconData iconData = new ControlElement.IconData(fileUri.getFile());
+        list.add(new StringElement("Sound File - WAV Format Only", "file", iconData));
     }
 
     public static GuildsAddon getInstance() {
@@ -65,9 +68,18 @@ public class GuildsAddon extends LabyModAddon {
         if(isSoundPlaying) return;
         this.isSoundPlaying = true;
         URL soundUri = getClass().getResource(soundPath);
-        if(soundUri == null) return;
+        File soundFile;
+        if(soundUri == null) {
+            try {
+                soundFile = new File(soundPath);
+            } catch (Exception ignored) {
+                return;
+            }
+        } else {
+            soundFile = new File(soundUri.getPath());
+        }
 
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundUri.getPath()));
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
         Clip clip = AudioSystem.getClip();
         clip.open(audioInputStream);
 
