@@ -39,7 +39,7 @@ public class GuildsAddon extends LabyModAddon {
         URL fileUri = getClass().getResource("/sound.jpg");
         if(fileUri == null) return;
         ControlElement.IconData iconData = new ControlElement.IconData(fileUri.getFile());
-        list.add(new StringElement("Sound File - WAV Format Only", "file", iconData));
+        list.add(new StringElement("Sound File - WAV Format Only", this, iconData, "file", soundPath));
     }
 
     public static GuildsAddon getInstance() {
